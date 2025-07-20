@@ -1,0 +1,13 @@
+{% extends 'dashboard/ebase.html' %}
+{% block title %}{{ form_title }} Ballot{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">{{ form_title }} Ballot</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Save</button>
+        <a href="{% url 'ballot_list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

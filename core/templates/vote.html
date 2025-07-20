@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Vote Page{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Welcome, {{ employee.name }}!</h2>
+
+{% if ballots %}
+<div class="row row-cols-1 row-cols-md-2 g-4">
+  {% for ballot in ballots %}
+  <div class="col">
+    <div class="card h-100 shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">{{ ballot.position.title }}</h5>
+        <p class="card-text">
+          <strong>Candidate:</strong> {{ ballot.candidate.employee.name }}<br/>
+          <strong>Symbol (Marka):</strong> {{ ballot.symbol }}<br/>
+          <strong>Ballot No:</strong> {{ ballot.ballot_no }}
+        </p>
+        <a href="{% url 'vote_ballot' ballot.id %}" class="btn btn-primary">Vote Now</a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% else %}
+<p class="lead">You have voted for all available ballots. Thank you!</p>
+{% endif %}
+
+<div class="mt-5">
+  <a href="{% url 'login_phone' %}" class="btn btn-outline-light">Logout</a>
+</div>
+{% endblock %}

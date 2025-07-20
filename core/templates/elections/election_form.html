@@ -1,0 +1,13 @@
+{% extends 'dashboard/ebase.html' %}
+{% block title %}{{ view.title }}{% endblock %}
+{% block content %}
+<h2 class="mb-4">{{ view.title }}</h2>
+<form method="post">
+    {% csrf_token %}
+    <div class="card p-4">
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary mt-2">Save</button>
+        <a href="{% url 'election_list' %}" class="btn btn-secondary mt-2">Cancel</a>
+    </div>
+</form>
+{% endblock %}

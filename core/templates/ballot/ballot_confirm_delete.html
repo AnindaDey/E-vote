@@ -1,0 +1,16 @@
+{% extends 'dashboard/ebase.html' %}
+{% block title %}Delete Ballot{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Confirm Delete</h2>
+    <p>Are you sure you want to delete the ballot of 
+        <strong>{{ ballot.candidate.employee.name }}</strong> for 
+        <strong>{{ ballot.position.title }}</strong>?
+    </p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Yes, delete</button>
+        <a href="{% url 'ballot_list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}Vote Successful{% endblock %}
+
+{% block content %}
+<div class="alert alert-success text-center">
+    ✅ Your vote has been submitted successfully!
+</div>
+<a href="{% url 'logout' %}" class="btn btn-outline-secondary w-100">Logout</a>
+{% endblock %}

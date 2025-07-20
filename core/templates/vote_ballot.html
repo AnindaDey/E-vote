@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Vote for Ballot {{ ballot.ballot_no }}{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card shadow p-4">
+      <h3 class="mb-4 text-center">Confirm Your Vote</h3>
+      <ul class="list-group mb-4">
+        <li class="list-group-item bg-dark text-white"><strong>Position:</strong> {{ ballot.position.title }}</li>
+        <li class="list-group-item bg-dark text-white"><strong>Candidate:</strong> {{ ballot.candidate.employee.name }}</li>
+        <li class="list-group-item bg-dark text-white"><strong>Symbol (Marka):</strong> {{ ballot.symbol }}</li>
+        <li class="list-group-item bg-dark text-white"><strong>Ballot No:</strong> {{ ballot.ballot_no }}</li>
+      </ul>
+
+      <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary w-100">Confirm Vote</button>
+      </form>
+
+      <div class="mt-3 text-center">
+        <a href="{% url 'vote_page' %}" class="btn btn-link">Back to Vote List</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

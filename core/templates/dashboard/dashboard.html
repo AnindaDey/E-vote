@@ -1,0 +1,65 @@
+{% extends 'dashboard/ebase.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Admin Dashboard</h2>
+    <div class="row g-4">
+
+        <!-- Employee -->
+        <div class="col-md-4">
+            <div class="card shadow-sm border-primary">
+                <div class="card-body">
+                    <h5 class="card-title">Employees</h5>
+                    <p class="card-text">Total: {{ employee_count }}</p>
+                    <a href="{% url 'employee_list' %}" class="btn btn-outline-primary">Manage</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Candidates -->
+        <div class="col-md-4">
+            <div class="card shadow-sm border-success">
+                <div class="card-body">
+                    <h5 class="card-title">Candidates</h5>
+                    <p class="card-text">Total: {{ candidate_count }}</p>
+                    <a href="{% url 'candidate_list' %}" class="btn btn-outline-success">Manage</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Positions -->
+        <div class="col-md-4">
+            <div class="card shadow-sm border-info">
+                <div class="card-body">
+                    <h5 class="card-title">Positions</h5>
+                    <p class="card-text">Total: {{ position_count }}</p>
+                    
+                </div>
+            </div>
+        </div>
+
+        <!-- Elections -->
+        <div class="col-md-4">
+            <div class="card shadow-sm border-warning">
+                <div class="card-body">
+                    <h5 class="card-title">Elections</h5>
+                    <p class="card-text">Total: {{ election_count }}</p>
+                    <a href="{% url 'election_list' %}" class="btn btn-outline-warning">Manage</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ballots -->
+        <div class="col-md-4">
+            <div class="card shadow-sm border-danger">
+                <div class="card-body">
+                    <h5 class="card-title">Ballots</h5>
+                    <p class="card-text">Total: {{ ballot_count }}</p>
+                    <a href="{% url 'ballot_list' %}" class="btn btn-outline-danger">Manage</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
