@@ -10,7 +10,7 @@
             <div class="card shadow-sm border-primary">
                 <div class="card-body">
                     <h5 class="card-title">Employees</h5>
-                    <p class="card-text">Total: {{ employee_count }}</p>
+                    <p class="card-text">Total Employee: {{ employee_count }}</p>
                     <a href="{% url 'employee_list' %}" class="btn btn-outline-primary">Manage</a>
                 </div>
             </div>
@@ -21,7 +21,7 @@
             <div class="card shadow-sm border-success">
                 <div class="card-body">
                     <h5 class="card-title">Candidates</h5>
-                    <p class="card-text">Total: {{ candidate_count }}</p>
+                    <p class="card-text">Total Candidates: {{ candidate_count }}</p>
                     <a href="{% url 'candidate_list' %}" class="btn btn-outline-success">Manage</a>
                 </div>
             </div>
@@ -32,8 +32,8 @@
             <div class="card shadow-sm border-info">
                 <div class="card-body">
                     <h5 class="card-title">Positions</h5>
-                    <p class="card-text">Total: {{ position_count }}</p>
-                    
+                    <p class="card-text">TotalPositions: {{ position_count }}</p>
+                    <a href="{% url 'position_list' %}" class="btn btn-outline-success">Manage</a>
                 </div>
             </div>
         </div>
@@ -43,7 +43,7 @@
             <div class="card shadow-sm border-warning">
                 <div class="card-body">
                     <h5 class="card-title">Elections</h5>
-                    <p class="card-text">Total: {{ election_count }}</p>
+                    <p class="card-text">Total Elections: {{ election_count }}</p>
                     <a href="{% url 'election_list' %}" class="btn btn-outline-warning">Manage</a>
                 </div>
             </div>
@@ -54,12 +54,31 @@
             <div class="card shadow-sm border-danger">
                 <div class="card-body">
                     <h5 class="card-title">Ballots</h5>
-                    <p class="card-text">Total: {{ ballot_count }}</p>
+                    <p class="card-text">Total Ballots: {{ ballot_count }}</p>
                     <a href="{% url 'ballot_list' %}" class="btn btn-outline-danger">Manage</a>
                 </div>
             </div>
         </div>
 
+        <!-- Votes -->
+<div class="col-md-4">
+    <div class="card shadow-sm border-dark">
+        <div class="card-body">
+            <h5 class="card-title">Votes</h5>
+            <p class="card-text">Total Votes: {{ vote_count }}</p>
+            <a href="{% url 'vote_results' %}" class="btn btn-outline-dark">Manage</a>
+        </div>
     </div>
 </div>
+
+
+    </div>
+</div>
+
+
+
 {% endblock %}
+
+
+
+

@@ -1,11 +1,23 @@
 from django.urls import path
-from .views import ( LoginPhoneView, VerifyOTPView, VotePageView, VoteBallotView,
-                     ElectionCreateView, ElectionUpdateView, ElectionDeleteView, ElectionListView,
-                     EmployeeListView,EmployeeDeleteView,EmployeeCreateView,EmployeeUpdateView,
-                     CandidateListView, CandidateCreateView,CandidateUpdateView, CandidateDeleteView,
-                     BallotListView, BallotCreateView, BallotUpdateView, BallotDeleteView,
-                     admin_dashboard_view)
 
+from .views.views import LoginPhoneView, VerifyOTPView, VotePageView, VoteBallotView, PositionBallotsView, logout_view
+from .views.elections import (
+    ElectionListView, ElectionCreateView, ElectionUpdateView, ElectionDeleteView
+)
+from .views.employees import (
+    EmployeeListView, EmployeeCreateView, EmployeeUpdateView, EmployeeDeleteView
+)
+from .views.candidates import (
+    CandidateListView, CandidateCreateView, CandidateUpdateView, CandidateDeleteView
+)
+from .views.ballots import (
+    BallotListView, BallotCreateView, BallotUpdateView, BallotDeleteView
+)
+from .views.dashboard import admin_dashboard_view
+from .views.positions import (
+    PositionListView, PositionCreateView, PositionUpdateView, PositionDeleteView
+)
+from .views.votes import vote_result_view
 urlpatterns = [
     path("login/", LoginPhoneView.as_view(), name="login_phone"),
     path("verify/", VerifyOTPView.as_view(), name="verify_otp"),
@@ -28,5 +40,17 @@ urlpatterns = [
     path('manage/ballots/<int:pk>/edit/', BallotUpdateView.as_view(), name='ballot_edit'),
     path('manage/ballots/<int:pk>/delete/', BallotDeleteView.as_view(), name='ballot_delete'),
     path('manage/dashboard/', admin_dashboard_view, name='admin_dashboard'),
+    path('manage/positions/', PositionListView.as_view(), name='position_list'),
+    path('manage/positions/add/', PositionCreateView.as_view(), name='position_add'),
+    path('manage/positions/edit/<int:pk>/', PositionUpdateView.as_view(), name='position_edit'),
+    path('manage/positions/delete/<int:pk>/', PositionDeleteView.as_view(), name='position_delete'),
+    path('manage/results/', vote_result_view, name='vote_results'),
+    path("vote/position/<int:position_id>/", PositionBallotsView.as_view(), name="position_ballots"),
+    path("vote/ballot/<int:ballot_id>/", VoteBallotView.as_view(), name="vote_ballot"),
+    path('logout/', logout_view, name='logout_view'),
+
+
+
+
 
 ]

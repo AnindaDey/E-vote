@@ -8,6 +8,7 @@
         <thead class="table-light">
             <tr>
                 <th>ID</th>
+                <th>Ballot</th>
                 <th>Position</th>
                 <th>Candidate</th>
                 <th>Election</th>
@@ -18,6 +19,7 @@
             {% for ballot in ballots %}
                 <tr>
                     <td>{{ ballot.id }}</td>
+                    <td>{{ ballot.ballot_no }}</td>
                     <td>{{ ballot.position.title }}</td>
                     <td>{{ ballot.candidate.employee.name }}</td>
                     <td>{{ ballot.election.title }}</td>

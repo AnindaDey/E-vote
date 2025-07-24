@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Candidates for {{ position.title }}{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <div class="card p-4">
+      <h3 class="mb-3 text-center">Position: {{ position.title }}</h3>
+      <p class="text-center">{{ position.description }}</p>
+
+      {% if ballots %}
+        <ul class="list-group">
+          {% for ballot in ballots %}
+            <li class="list-group-item d-flex justify-content-between align-items-center bg-dark text-light">
+              <div>
+                <strong>{{ ballot.candidate.employee.name }}</strong> — {{ ballot.symbol }}
+              </div>
+              <a href="{% url 'vote_ballot' ballot.id %}" class="btn btn-primary btn-sm">Vote</a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <div class="alert alert-warning text-center">
+          No candidates available for this position.
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Candidate,Election,Employee,Candidate,Ballot
+from .models import Candidate, Election, Employee, Candidate, Ballot, Position
 
 class PhoneForm(forms.Form):
     phone = forms.CharField(max_length=15, label="Phone Number")
@@ -43,4 +43,14 @@ class CandidateForm(forms.ModelForm):
 class BallotForm(forms.ModelForm):
     class Meta:
         model = Ballot
-        fields = ['election', 'position', 'candidate']
+        fields = ['election', 'ballot_no', 'symbol', 'position', 'candidate']
+
+class PositionForm(forms.ModelForm):
+    class Meta:
+        model = Position
+        fields = ['title', 'description']
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
+        }
+

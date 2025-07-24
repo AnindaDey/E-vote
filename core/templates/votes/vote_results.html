@@ -1,0 +1,45 @@
+{% extends 'dashboard/ebase.html' %}
+{% block title %}Election Results{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Election Results</h2>
+
+    {% for election_data in result_data %}
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                <h4>{{ election_data.election.title }} ({{ election_data.election.start_date }} to {{ election_data.election.end_date }})</h4>
+            </div>
+            <div class="card-body">
+                {% for position_data in election_data.positions %}
+                    <div class="mb-4">
+                        <h5 class="text-dark">{{ position_data.position.title }}</h5>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Candidate</th>
+                                    <th>Symbol</th>
+                                    <th>Ballot No</th>
+                                    <th>Votes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for ballot in position_data.ballots %}
+                                    <tr>
+                                        <td>{{ ballot.candidate.employee.name }}</td>
+                                        <td>{{ ballot.symbol }}</td>
+                                        <td>{{ ballot.ballot_no }}</td>
+                                        <td><strong>{{ ballot.vote_count }}</strong></td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% empty %}
+        <p>No election data available.</p>
+    {% endfor %}
+</div>
+{% endblock %}

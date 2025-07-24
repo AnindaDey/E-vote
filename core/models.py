@@ -118,10 +118,12 @@ class Vote(BaseModel):
     voter = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name='voter')
     ballot = models.ForeignKey(Ballot, on_delete=models.CASCADE)
     election = models.ForeignKey(Election, on_delete=models.CASCADE)
+    position = models.ForeignKey(Position, on_delete=models.CASCADE)
+
 
 
     class Meta:
-        unique_together = ('voter', 'ballot')  # Prevent double voting
+        unique_together = ('voter', 'position')  # Prevent double voting
 
     def __str__(self):
         return f"{self.voter.name} voted for {self.ballot.candidate.employee.name} in {self.ballot.position.title}"

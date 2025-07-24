@@ -1,32 +1,27 @@
 {% extends "base.html" %}
-{% block title %}Vote Page{% endblock %}
-
+{% block title %}Choose Position - E-Voting{% endblock %}
 {% block content %}
-<h2 class="mb-4">Welcome, {{ employee.name }}!</h2>
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <div class="card p-4">
+      <h2 class="mb-3 text-center">Hello {{ employee.name }}</h2>
+      <h4 class="mb-4 text-center">Select a Position to Vote</h4>
 
-{% if ballots %}
-<div class="row row-cols-1 row-cols-md-2 g-4">
-  {% for ballot in ballots %}
-  <div class="col">
-    <div class="card h-100 shadow-sm">
-      <div class="card-body">
-        <h5 class="card-title">{{ ballot.position.title }}</h5>
-        <p class="card-text">
-          <strong>Candidate:</strong> {{ ballot.candidate.employee.name }}<br/>
-          <strong>Symbol (Marka):</strong> {{ ballot.symbol }}<br/>
-          <strong>Ballot No:</strong> {{ ballot.ballot_no }}
-        </p>
-        <a href="{% url 'vote_ballot' ballot.id %}" class="btn btn-primary">Vote Now</a>
-      </div>
+      {% if positions %}
+        <ul class="list-group">
+          {% for position in positions %}
+            <li class="list-group-item d-flex justify-content-between align-items-center bg-dark text-light">
+              {{ position.title }}
+              <a href="{% url 'position_ballots' position.id %}" class="btn btn-primary btn-sm">Vote</a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <div class="alert alert-info text-center mt-3">
+          You have voted in all available positions.
+        </div>
+      {% endif %}
     </div>
   </div>
-  {% endfor %}
-</div>
-{% else %}
-<p class="lead">You have voted for all available ballots. Thank you!</p>
-{% endif %}
-
-<div class="mt-5">
-  <a href="{% url 'login_phone' %}" class="btn btn-outline-light">Logout</a>
 </div>
 {% endblock %}
