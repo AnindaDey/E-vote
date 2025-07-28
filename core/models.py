@@ -18,17 +18,30 @@ class BaseModel(models.Model):
     is_draft = models.BooleanField(_('Is Draft'), default=True)
     is_active = models.BooleanField(_('Is Active'), default=True)
     order = models.CharField(_("Order"), max_length=255, blank=True, null=True)
-    display_order = models.CharField(_("Display Order"), max_length=255, blank=True, null=True)
+    display_order = models.CharField(
+        _("Display Order"),
+        max_length=255,
+        blank=True,
+        null=True
+    )
     is_deleted = models.BooleanField(_('Is Deleted'), default=False)
-    created_at = models.DateTimeField(_('Created At'), auto_now_add=True, null=True)
+    created_at = models.DateTimeField(
+        _('Created At'),
+        auto_now_add=True,
+        null=True
+    )
     update_user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.SET_NULL,
         blank=True,
         null=True,
-        related_name="%(app_label)s_%(class)s_updated"
+        related_name=(
+            "%(app_label)s_%(class)s_updated"
+        )
     )
-    last_updated = models.DateTimeField(_('Last Updated'), auto_now=True, null=True)
+    last_updated = models.DateTimeField(
+        _('Last Updated'), auto_now=True, null=True
+    )
     deleted_user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.SET_NULL,
@@ -61,6 +74,7 @@ class OTP(BaseModel):
     def __str__(self):
         return f"{self.phone} - {self.code}"
 
+
 class Election(BaseModel):
     title = models.CharField(max_length=255)
     start_date = models.DateField()
@@ -92,7 +106,9 @@ class Candidate(BaseModel):
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
 
     class Meta:
-        unique_together = ('employee',)  # Optional: one-time candidacy across system
+        unique_together = (
+            'employee',
+        )  # Optional: one-time candidacy across system
 
     def __str__(self):
         return self.employee.name
@@ -106,24 +122,32 @@ class Ballot(BaseModel):
     election = models.ForeignKey(Election, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.ballot_no} - {self.candidate.employee.name} for {self.position.title}"
+        return (
+            f"{self.ballot_no} - {self.candidate.employee.name} "
+            f"for {self.position.title}"
+        )
 
     class Meta:
         unique_together = ('candidate', 'position', 'election')
         verbose_name_plural = "Ballots"
 
 
-
 class Vote(BaseModel):
-    voter = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name='voter')
+    voter = models.ForeignKey(
+        Employee,
+        on_delete=models.CASCADE,
+        related_name='voter'
+    )
     ballot = models.ForeignKey(Ballot, on_delete=models.CASCADE)
     election = models.ForeignKey(Election, on_delete=models.CASCADE)
     position = models.ForeignKey(Position, on_delete=models.CASCADE)
-
-
 
     class Meta:
         unique_together = ('voter', 'position')  # Prevent double voting
 
     def __str__(self):
-        return f"{self.voter.name} voted for {self.ballot.candidate.employee.name} in {self.ballot.position.title}"
+        return (
+            f"{self.voter.name} voted for "
+            f"{self.ballot.candidate.employee.name} in "
+            f"{self.ballot.position.title}"
+        )

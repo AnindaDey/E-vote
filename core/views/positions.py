@@ -22,5 +22,5 @@ class PositionUpdateView(UpdateView):
 
 class PositionDeleteView(DeleteView):
     model = Position
-    template_name = 'position/sposition_confirm_delete.html'
+    template_name = 'positions/position_confirm_delete.html'
     success_url = reverse_lazy('position_list')

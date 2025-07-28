@@ -17,7 +17,7 @@
             {% for position in positions %}
             <tr>
                 <td>{{ forloop.counter }}</td>
-                <td>{{ position.name }}</td>
+                <td>{{ position.title }}</td>
                 <td>{{ position.description|default:"N/A" }}</td>
                 <td>
                     <a href="{% url 'position_edit' position.pk %}" class="btn btn-sm btn-warning">Edit</a>
